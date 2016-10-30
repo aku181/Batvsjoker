@@ -3,7 +3,7 @@ import pygame, random
 pygame.init()
 
 pygame.mixer.init()
-
+# loading music
 pygame.mixer.music.load("batman_theme.mp3")
 try:
     batmanAttackSound = pygame.mixer.Sound("batman.wav")
@@ -15,7 +15,7 @@ try:
 except:
     print ("File not Found")
     pass
-
+#define window and objects size 
 dispalyWidth  = 1024
 dispalyHeight  = 600
 carSize = 128
@@ -23,15 +23,19 @@ jokerSize = 250
 batLogoSizeL = 380
 batLogoSizeW = 200
 FPS = 60
+
+#colors
 black = (0,0,0)
 white = (255,255,255)
 yellow = (255,255,0)
 purple = (138,43,226)
 
+#set window
 gameDisplay = pygame.display.set_mode((dispalyWidth,dispalyHeight))
 pygame.display.set_caption("Batman vs. Joker")
 clock =  pygame.time.Clock()
 
+# load images from current directory
 try:
     batMobile = pygame.image.load('batman.png')
     joker1 = pygame.image.load('joker.png')
@@ -41,6 +45,8 @@ try:
 except:
     print ("File not Found")
     pass
+
+# setting objects 
 
 def batCar(x,y):
     gameDisplay.blit(batMobile,(x,y))
@@ -57,6 +63,8 @@ def funnyBatman(x,y):
 def batarang(x,y):
     gameDisplay.blit(batarang1,(x,y))
 
+# crash detection    
+    
 def detectCrash(x1,y1,w1,h1,x2,y2,w2,h2):
     if(x2+w2>=x1>=x2 and y2+h2>=y1>=y2):
         return True
@@ -72,9 +80,13 @@ def detectCrash(x1,y1,w1,h1,x2,y2,w2,h2):
     else:
         return False
 
+# displaying text    
+    
 def text_objects(text, font):
     textSurface = font.render(text, True, black)
     return textSurface, textSurface.get_rect()
+
+#creating button
 
 def button(msg,x,y,w,h,ic,action=None):
     mouse = pygame.mouse.get_pos()
@@ -93,6 +105,8 @@ def button(msg,x,y,w,h,ic,action=None):
     textRect.center = ( (x+(w/2)), (y+(h/2)) )
     gameDisplay.blit(textSurf, textRect)
 
+#quit game function
+    
 def quitGame():
     pygame.quit()
     quit()
